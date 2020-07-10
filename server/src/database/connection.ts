@@ -7,6 +7,7 @@ const connection = knex({
         //Conexão com o arquivo onde ficara guardado os dados.
         filename: path.resolve(__dirname, 'database.sqlite'),
     },
+    useNullAsDefault: true
 });
 
 export default connection;
