@@ -5,7 +5,7 @@ export async function up(knex: Knex) {
         table.increments('id').primary(); //Integer por padrão.
         table.string('image').notNullable();
         table.string('name').notNullable();
-        table.string('gmail').notNullable();
+        table.string('email').notNullable();
         table.string('whatsapp').notNullable();
         table.decimal('latitude').notNullable();
         table.decimal('longitude').notNullable();
