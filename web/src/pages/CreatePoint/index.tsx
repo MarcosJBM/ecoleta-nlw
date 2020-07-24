@@ -27,11 +27,21 @@ interface ibgeCity {
 const CreatePoint = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [ufs, setUfs] = useState<string[]>([]);
-    const [cities, setCities] = useState<string[]>([])
+    const [cities, setCities] = useState<string[]>([]);
+
+    const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
 
     const [selectedUf, setSelectedUf] = useState('0');
     const [selectedCity, setSelectedCity] = useState('0');
-    const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0])
+    const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+
+    //Retorna a localização atual do User.
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            setInitialPosition([latitude, longitude]);
+        });
+    }, []);
 
     //Busca as Imagens dos ITEMS da API
     useEffect(() => {
@@ -130,7 +140,7 @@ const CreatePoint = () => {
                         <span>Selecione um ou mais ítens abaixo</span>
                     </legend>
 
-                    <Map center={[-27.0996567, -48.9063677]} zoom={15} onClick={handleMapClick}>
+                    <Map center={initialPosition} zoom={15} onClick={handleMapClick}>
                         <TileLayer
                             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
