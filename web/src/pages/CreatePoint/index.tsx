@@ -1,5 +1,5 @@
-import React, { useEffect, useState, ChangeEvent } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import api from '../../services/api';
 import axios from 'axios';
@@ -40,6 +40,8 @@ const CreatePoint = () => {
     const [selectedCity, setSelectedCity] = useState('0');
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+
+    const history = useHistory();
 
     //Busca as Imagens dos ITEMS da API
     useEffect(() => {
@@ -115,6 +117,33 @@ const CreatePoint = () => {
         };
     };
 
+    async function handleSubmit(event: FormEvent) {
+        event.preventDefault();
+
+        const { name, email, whatsapp } = formData;
+        const uf = selectedUf;
+        const city = selectedCity;
+        const [latitude, longitude] = selectedPosition;
+        const items = selectedItems;
+
+        const data = {
+            name,
+            email,
+            whatsapp,
+            uf,
+            city,
+            latitude,
+            longitude,
+            items
+        };
+
+        //Cadastra na API.
+        await api.post('points', data);
+        alert('Ponto de coleta cadastrado!');
+        //Manda pra tela HOME.
+        history.push('/');
+    };
+
     return (
         <div id="page-create-point">
             <header>
@@ -126,7 +155,7 @@ const CreatePoint = () => {
                 </Link>
             </header>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h1>Cadastro do ponto de coleta.</h1>
 
                 <fieldset>
