@@ -117,6 +117,7 @@ const CreatePoint = () => {
         };
     };
 
+    //Cadastra um PONTO DE COLETA.
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
 
