@@ -15,6 +15,7 @@ interface Item {
 
 const Points = () => {
     const [items, setItems] = useState<Item[]>([]);
+    const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const navigation = useNavigation();
 
     useEffect(() => {
@@ -29,6 +30,17 @@ const Points = () => {
 
     function handleNavigateToDetail() {
         navigation.navigate('Detail');
+    };
+
+    function handleSelectedItem(id: number) {
+        const alreadySelected = selectedItems.findIndex(item => item === id);
+
+        if (alreadySelected >= 0) {
+            const filteredItems = selectedItems.filter(item => item !== id);
+            setSelectedItems(filteredItems);
+        } else {
+            setSelectedItems([...selectedItems, id]);
+        };
     };
 
     return (
@@ -71,12 +83,19 @@ const Points = () => {
                         horizontal
                         showsHorizontalScrollIndicator={false}
                     >
-                        {items.map(item => {
-                            <TouchableOpacity style={styles.item} onPress={() => { }}>
+                        {items.map(item => (
+                            <TouchableOpacity
+                                key={item.id}
+                                style={[
+                                    styles.item,
+                                    selectedItems.includes(item.id) ? styles.selectedItem : {}
+                                ]}
+                                onPress={() => handleSelectedItem(item.id)}
+                            >
                                 <SvgUri width={42} height={42} uri={item.image_url} />
                                 <Text style={styles.itemTitle}>{item.title}</Text>
                             </TouchableOpacity>
-                        })}
+                        ))}
                     </ScrollView>
                 </View>
             </View>
