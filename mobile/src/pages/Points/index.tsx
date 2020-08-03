@@ -77,8 +77,8 @@ const Points = () => {
         navigation.goBack();
     };
 
-    function handleNavigateToDetail() {
-        navigation.navigate('Detail');
+    function handleNavigateToDetail(id: number) {
+        navigation.navigate('Detail', { point_id: id }); //Pega o ID do Ponto, assim pode utilizar em outra Pagina.
     };
 
     //Permite selecionar os Items.
@@ -117,7 +117,8 @@ const Points = () => {
                             {points.map(point => (
                                 <Marker
                                     style={styles.mapMarker}
-                                    onPress={handleNavigateToDetail}
+                                    key={point.id}
+                                    onPress={() => handleNavigateToDetail(point.id)}
                                     coordinate={{
                                         latitude: point.latitude,
                                         longitude: point.longitude
