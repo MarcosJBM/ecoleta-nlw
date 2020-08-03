@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Feather as Icon } from '@expo/vector-icons'
-import { View, ImageBackground, Image, StyleSheet, Text } from 'react-native';
+import { View, ImageBackground, Image, StyleSheet, Text, TextInput } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
+    const [uf, setUf] = useState('');
+    const [city, setCity] = useState('');
+
     const navigation = useNavigation();
 
     function handleNavigateToPoints() {
-        navigation.navigate('Points');
+        navigation.navigate('Points', {
+            uf,
+            city,
+        });
     };
 
     return (
@@ -19,11 +25,30 @@ const Home = () => {
         >
             <View style={styles.main}>
                 <Image source={require('../../assets/logo.png')} />
-                <Text style={styles.title}>Seu marketplace de coleta de resíduos</Text>
-                <Text style={styles.description}>Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.</Text>
+                <View>
+                    <Text style={styles.title}>Seu marketplace de coleta de resíduos</Text>
+                    <Text style={styles.description}>Ajudamos pessoas a encontrarem pontos de coleta de forma eficiente.</Text>
+                </View>
             </View>
 
             <View style={styles.footer}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite a UF"
+                    value={uf}
+                    maxLength={2}
+                    autoCapitalize="characters"
+                    autoCorrect={false}
+                    onChangeText={setUf}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite sua cidade"
+                    value={city}
+                    autoCorrect={false}
+                    onChangeText={setCity}
+                />
+
                 <RectButton style={styles.button} onPress={handleNavigateToPoints}>
                     <View style={styles.buttonIcon}>
                         <Text>
