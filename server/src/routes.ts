@@ -25,7 +25,7 @@ routes.post(
       body: Joi.object().keys({
         name: Joi.string().required(),
         email: Joi.string().required(),
-        whatsapp: Joi.number().required(),
+        whatsapp: Joi.string().required(),
         latitude: Joi.number().required(),
         longitude: Joi.number().required(),
         city: Joi.string().required(),
