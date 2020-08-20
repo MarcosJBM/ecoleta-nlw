@@ -20,7 +20,7 @@ class PointsController {
     const serializedPoints = points.map(point => {
       return {
         ...point,
-        image_url: `http://192.168.0.104:3333/pointsImage/${point.image}`,
+        image_url: `http://192.168.0.105:3333/pointsImage/${point.image}`,
       };
     });
 
@@ -40,7 +40,7 @@ class PointsController {
 
     const serializedPoint = {
       ...point,
-      image_url: `http://192.168.0.104:3333/pointsImage/${point.image}`,
+      image_url: `http://192.168.0.105:3333/pointsImage/${point.image}`,
     };
 
     //Relaciona os ITEMS com um PONTO em pelo ID.
