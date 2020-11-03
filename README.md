@@ -1,94 +1,114 @@
-<div align="center">
-  <img src=".github/logoEcoleta.png" alt="logoEcoleta" align="center" width="500px"/>
-</div>
+<h1 align="center">
+    <img alt="Ecoleta" src=".github/logoEcoleta.png" height="100px" />
+    <br>Next Level Week #1<br/>
+    Node.js | ReactJS | React Native
+</h1>
 
-# Índice
+<p align="center">
+    <a href="#sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#tecnologias">Tecnologias Utilizadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#web">Versão Web</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#mobile">Versão Mobile</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#executar">Como Executar</a>
+</p>
 
-- [Sobre o Projeto](#sobre)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Versão Web](#versao-web)
-- [Versão Mobile](#versao-mobile)
-- [Como Usar a Aplicação](#como-usar)
+<p align="center">
+    <img alt="Design do Projeto" width="780px" src=".github/designEcoleta.png" />
+<p>
 
-<a id="sobre"/>
+<a id="sobre"></a>
 
-# 📖 Sobre o Projeto
+<h1>📖 Sobre o Projeto</h1>
 
-O **Ecoleta** é uma aplicação Web e Mobile que visa ajudar pessoas a encontrarem pontos de coleta de lixo.
+O **Ecoleta** é uma aplicação Web e Mobile que ajuda pessoas a cadastrarem e encontrarem pontos de coleta de lixo.
 
-Esta aplicação foi desenvolvida durante a **primeira** edição da semana **Next Level Week** da [Rocketseat](https://rocketseat.com.br/).
+Este projeto foi realizado na semana do meio ambiente.
 
-<a id="tecnologias-utilizadas"/>
+Esta aplicação foi desenvolvida durante a **Next Level Week #1**, projeto da [Rocketseat](https://rocketseat.com.br/).
 
-# ⚙ Tecnologias Utilizadas
+<a id="tecnologias"></a>
 
-As seguintes tecnologias foram utilizadas para a construção deste projeto:
-- [ReactJS](https://reactjs.org/)
-- [React Native](https://reactnative.dev/)
+<h1>🔩 Tecnologias Utilizadas</h1>
+
+- [Axios](https://github.com/axios/axios)
+- [Express](https://expressjs.com/)
+- [Expo](https://expo.io/)
+- [Leaflet](https://leafletjs.com/)
 - [Node.js](https://nodejs.org/en/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [NPM](https://www.npmjs.com/)
+- [ReactJS](https://reactjs.org/)
+- [React Native](http://facebook.github.io/react-native/)
+- [React Navigation](https://reactnavigation.org/)
+- [Typescript](https://www.typescriptlang.org/)
 - [Knex](http://knexjs.org/)
+- [SQLite](https://www.sqlite.org/)
+- [Yarn](https://yarnpkg.com/)
 
-<a id="versao-web"/>
+<a id="web"></a>
 
-# 💻 Versão Web
+<h1>💻 Versão Web</h1>
 
-<div align="center">
-  <h3>Resultado da aplicação Web.</h3>
-  <img src=".github/firstPageEcoleta.PNG" width="600px" height="auto"/>
-  <img src=".github/pointsWebGif.gif" width="600px" height="auto"/>
-</div>
+Caso esteja curioso para saber como é a versão **Web** do **Ecoleta**, o layout está disponivel no [Figma](<https://www.figma.com/file/9TlOcj6l7D05fZhU12xWT3/Ecoleta-(Booster)?node-id=0%3A1>).
 
-<a id="versao-mobile"/>
+<a id="mobile"></a>
 
-# 📱 Versão Mobile
+<h1>📱 Versão Mobile</h1>
 
-<div align="center" flexDirection="row">
- <h3>Resultado da aplicação Mobile</h3>
- <img src=".github/firstPageMobile.png" width="auto" height="550px">
- <img src=".github/pointsMobile.png" width="auto" height="550px"/>
- <img src=".github/detailMobile.png" width="auto" height="550px"/>
-</div>
+Caso esteja curioso para saber como é a versão **Mobile** do **Ecoleta**, o layout está disponivel no [Figma](<https://www.figma.com/file/9TlOcj6l7D05fZhU12xWT3/Ecoleta-(Booster)?node-id=0%3A1>).
 
-<a id="como-usar"/>
+<a id="executar"></a>
 
-# ❓ Como Usar a Aplicação
+<h1>❔ Como Usar a Aplicação</h1>
 
-### Observação:
-Para mexer nesta aplicação voce necessita ter algumas ferramentas instaladas no seu computador e celular, abra este 
-[guia](https://www.notion.so/Configurando-Ambiente-NLW-98a471ad3cb6448284b8ceed31c45767), leia com atenção e siga as intruções, é simples, não precisa ter medo 😉.
+<h2><strong>Pré-requisitos</strong></h2>
 
-### → Passo um: Clonando o Projeto na sua máquina:
-Abra seu terminal, escolha um lugar para guardar o repositório e execute:
+- É **necessário** possuir o **[Node.js](https://nodejs.org/en/)** instalado no computador.
+- É **necessário** possuir o **[Git](https://git-scm.com/)** instalado e configurado no computador.
+- É **necessário** possuir um gerenciador de pacotes, **[Yarn](https://yarnpkg.com/)** ou **[NPM](https://www.npmjs.com/)**.
+- É **necessário** ter o **[Expo](https://expo.io/)** instalado de forma global na máquina.
+
+<h2>Passo 1: Clonando o Projeto na sua máquina:</h2>
+
+Abra seu terminal, escolha um lugar para clonar o repositório e execute:
+
 ```sh
   git clone https://github.com/MarcosJBM/Ecoleta-NLW.git
 ```
-Com isso o repositório já estará na sua maquina.
 
-### → Passo dois: Configurando o Projeto:
+<h2>Passo 2: Configurando o Projeto:</h2>
+
 Nas pastas **Server** e **Web** execute:
+
 ```sh
  npm install
 ```
+
 Com isso, dependências do projeto serão instaladas.
 
 Na pasta **Server** voce irá precisar criar o **banco de dados**, execute:
+
 ```sh
  npx knex migrate:up "nome da migration"
 ```
+
 Faça isso com cada Migration.
 
 Voce irá precisar criar uma Seed, execute:
+
 ```sh
  npm run knex:seed
 ```
 
-### → Passo três: Executando a aplicação.
+<h2>Passo 3: Executando a aplicação:</h2>
+
 Para executar a aplicação **Web** e **Mobile** utilize:
+
 ```sh
  npm start
 ```
+
 Para executar o **Server**, utilize:
+
 ```sh
  npm run dev
 ```
