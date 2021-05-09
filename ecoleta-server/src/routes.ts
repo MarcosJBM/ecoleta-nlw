@@ -1,13 +1,14 @@
-import express from 'express';
+import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-
 import multer from 'multer';
+
 import multerConfig from './config/multer';
 
 import PointsController from './controllers/PointsController';
 import ItemsController from './controllers/ItemsController';
 
-const routes = express.Router();
+export const routes = Router();
+
 const upload = multer(multerConfig);
 
 const pointsController = new PointsController();
@@ -39,5 +40,3 @@ routes.post(
   ),
   pointsController.create
 );
-
-export default routes;
