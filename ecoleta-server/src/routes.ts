@@ -11,13 +11,10 @@ export const routes = Router();
 
 const upload = multer(multerConfig);
 
-const pointsController = new PointsController();
-const itemsController = new ItemsController();
+routes.get('/items', ItemsController.index);
 
-routes.get('/items', itemsController.index);
-
-routes.get('/points', pointsController.index);
-routes.get('/points/:id', pointsController.show);
+routes.get('/points', PointsController.index);
+routes.get('/points/:id', PointsController.show);
 routes.post(
   '/points',
   upload.single('image'),
@@ -38,5 +35,5 @@ routes.post(
       abortEarly: false,
     }
   ),
-  pointsController.create
+  PointsController.create
 );

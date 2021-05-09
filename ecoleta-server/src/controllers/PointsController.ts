@@ -1,56 +1,57 @@
-import { Request, Response, query } from "express";
-import knex from "../database/connection";
+import { Request, Response } from 'express';
 
-class PointsController {
+import { connection } from '../database/connection';
+
+export default {
   async index(request: Request, response: Response) {
     const { city, uf, items } = request.query;
 
     const parsedItems = String(items)
-      .split(",")
+      .split(',')
       .map(item => Number(item.trim()));
 
-    const points = await knex("points")
-      .join("point_items", "points.id", "=", "point_items.point_id")
-      .whereIn("point_items.item_id", parsedItems)
-      .where("city", String(city))
-      .where("uf", String(uf))
+    const points = await connection('points')
+      .join('point_items', 'points.id', '=', 'point_items.point_id')
+      .whereIn('point_items.item_id', parsedItems)
+      .where('city', String(city))
+      .where('uf', String(uf))
       .distinct()
-      .select("points.*");
+      .select('points.*');
 
     const serializedPoints = points.map(point => {
       return {
         ...point,
-        image_url: `http://192.168.0.105:3333/pointsImage/${point.image}`,
+        image_url: `http://http://192.168.2.52:3333/pointsImage/${point.image}`,
       };
     });
 
     return response.json(serializedPoints);
-  }
+  },
 
   //Retorna um unico Registro.
   async show(request: Request, response: Response) {
     const { id } = request.params;
 
     //Pega o ID de um PONTO especifico.
-    const point = await knex("points").where("id", id).first();
+    const point = await connection('points').where('id', id).first();
 
     if (!point) {
-      return response.status(400).json({ message: "Point Not Found..." });
+      return response.status(400).json({ message: 'Point Not Found...' });
     }
 
     const serializedPoint = {
       ...point,
-      image_url: `http://192.168.0.105:3333/pointsImage/${point.image}`,
+      image_url: `http://http://192.168.2.52:3333/pointsImage/${point.image}`,
     };
 
     //Relaciona os ITEMS com um PONTO em pelo ID.
-    const items = await knex("items")
-      .join("point_items", "items.id", "=", "point_items.item_id")
-      .where("point_items.point_id", id)
-      .select("items.title");
+    const items = await connection('items')
+      .join('point_items', 'items.id', '=', 'point_items.item_id')
+      .where('point_items.point_id', id)
+      .select('items.title');
 
     return response.json({ point: serializedPoint, items });
-  }
+  },
 
   //Cria um ponto de Coleta.
   async create(request: Request, response: Response) {
@@ -65,7 +66,7 @@ class PointsController {
       items,
     } = request.body;
 
-    const trx = await knex.transaction();
+    const trx = await connection.transaction();
 
     //Objeto que guarda as informações do PONTO.
     const point = {
@@ -79,13 +80,13 @@ class PointsController {
       uf,
     };
 
-    const insertedIds = await trx("points").insert(point);
+    const insertedIds = await trx('points').insert(point);
 
     const point_id = insertedIds[0]; //Armazena o ID do PONTO.
 
     //Item_id → ID do Item, o NUMBER especifica que o ID é um número.
     const pointItems = items
-      .split(",")
+      .split(',')
       .map((item: string) => Number(item.trim()))
       .map((item_id: number) => {
         return {
@@ -95,7 +96,7 @@ class PointsController {
       });
 
     //Relacionando o ID do PONTO com os IDs dos ITEMS.
-    await trx("point_items").insert(pointItems);
+    await trx('point_items').insert(pointItems);
 
     await trx.commit();
 
@@ -103,7 +104,5 @@ class PointsController {
       id: point_id,
       ...point,
     });
-  }
-}
-
-export default PointsController;
+  },
+};
