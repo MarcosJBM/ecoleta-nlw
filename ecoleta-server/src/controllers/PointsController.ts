@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { Point, Item } from '../@types';
+import { Point, Item, CreatePointProps } from '../@types';
 
 import { connection } from '../database/connection';
 
@@ -65,8 +65,8 @@ export default {
       longitude,
       city,
       uf,
-      items,
-    } = request.body;
+      item,
+    }: CreatePointProps = request.body;
 
     const trx = await connection.transaction();
 
@@ -87,7 +87,7 @@ export default {
     const point_id = insertedIds[0]; //Armazena o ID do PONTO.
 
     //Item_id → ID do Item, o NUMBER especifica que o ID é um número.
-    const pointItems = items
+    const pointItems = String(item)
       .split(',')
       .map((item: string) => Number(item.trim()))
       .map((item_id: number) => {
