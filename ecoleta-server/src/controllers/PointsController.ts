@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 
+import { Point, Item } from '../@types';
+
 import { connection } from '../database/connection';
 
 export default {
@@ -10,7 +12,7 @@ export default {
       .split(',')
       .map(item => Number(item.trim()));
 
-    const points = await connection('points')
+    const points: Point[] = await connection('points')
       .join('point_items', 'points.id', '=', 'point_items.point_id')
       .whereIn('point_items.item_id', parsedItems)
       .where('city', String(city))
@@ -25,7 +27,7 @@ export default {
       };
     });
 
-    return response.json(serializedPoints);
+    return response.status(200).json(serializedPoints);
   },
 
   //Retorna um unico Registro.
@@ -33,10 +35,10 @@ export default {
     const { id } = request.params;
 
     //Pega o ID de um PONTO especifico.
-    const point = await connection('points').where('id', id).first();
+    const point: Point = await connection('points').where('id', id).first();
 
     if (!point) {
-      return response.status(400).json({ message: 'Point Not Found...' });
+      return response.status(404).json({ message: 'Point Not Found...' });
     }
 
     const serializedPoint = {
@@ -45,12 +47,12 @@ export default {
     };
 
     //Relaciona os ITEMS com um PONTO em pelo ID.
-    const items = await connection('items')
+    const items: Item[] = await connection('items')
       .join('point_items', 'items.id', '=', 'point_items.item_id')
       .where('point_items.point_id', id)
       .select('items.title');
 
-    return response.json({ point: serializedPoint, items });
+    return response.status(200).json({ point: serializedPoint, items });
   },
 
   //Cria um ponto de Coleta.
@@ -100,7 +102,7 @@ export default {
 
     await trx.commit();
 
-    return response.json({
+    return response.status(201).json({
       id: point_id,
       ...point,
     });
