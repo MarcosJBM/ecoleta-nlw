@@ -1,12 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FiLogIn } from "react-icons/fi";
+import { Link } from 'react-router-dom';
+import { FiLogIn } from 'react-icons/fi';
 
-import logo from "../../assets/logo.svg";
+import logo from '../../assets/logo.svg';
 
-import "./styles.css";
+import './styles.css';
 
-const Home = () => {
+export const Home = () => {
   return (
     <div id='page-home'>
       <div className='content'>
@@ -31,5 +30,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

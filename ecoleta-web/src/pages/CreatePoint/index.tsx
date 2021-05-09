@@ -1,19 +1,18 @@
-import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
-import { FiArrowLeft } from "react-icons/fi";
-import { Link, useHistory } from "react-router-dom";
-import { Map, TileLayer, Marker } from "react-leaflet";
-import { LeafletMouseEvent } from "leaflet";
+import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
+import { Link, useHistory } from 'react-router-dom';
+import { TileLayer, Marker, MapContainer } from 'react-leaflet';
+import { LeafletMouseEvent } from 'leaflet';
+import { FiArrowLeft } from 'react-icons/fi';
 
-import api from "../../services/api";
-import axios from "axios";
+import logo from '../../assets/logo.svg';
 
-import Dropzone from "../../components/Dropzone";
+import {Dropzone} from '../../components/Dropzone';
 
-import "./styles.css";
+import { api } from '../../services/api';
 
-import logo from "../../assets/logo.svg";
+import './styles.css';
 
-//Array e Objeto: Manualmente informar o tipo da variavel
 interface Item {
   id: number;
   title: string;
@@ -28,7 +27,7 @@ interface ibgeCity {
   nome: string;
 }
 
-const CreatePoint = () => {
+export const CreatePoint = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [ufs, setUfs] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
@@ -38,13 +37,13 @@ const CreatePoint = () => {
   ]);
 
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    whatsapp: "",
+    name: '',
+    email: '',
+    whatsapp: '',
   });
 
-  const [selectedUf, setSelectedUf] = useState("0");
-  const [selectedCity, setSelectedCity] = useState("0");
+  const [selectedUf, setSelectedUf] = useState('0');
+  const [selectedCity, setSelectedCity] = useState('0');
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
     0,
@@ -54,18 +53,16 @@ const CreatePoint = () => {
 
   const history = useHistory();
 
-  //Busca as Imagens dos ITEMS da API
+  //Busca as Imagens dos Items na API
   useEffect(() => {
-    api.get("items").then(response => {
-      setItems(response.data);
-    });
+    api.get<Item[]>('items').then(response => setItems(response.data));
   }, []);
 
-  //Busca UFs da API do IBGE
+  //Busca as UFs da API do IBGE
   useEffect(() => {
-    api
+    axios
       .get<ibgeUf[]>(
-        "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+        'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
       )
       .then(response => {
         const ufInitials = response.data.map(uf => uf.sigla);
@@ -73,11 +70,9 @@ const CreatePoint = () => {
       });
   }, []);
 
-  //Busca Cidades da API do IBGE
+  //Busca as Cidades na API do IBGE
   useEffect(() => {
-    if (selectedUf === "0") {
-      return;
-    }
+    if (!selectedUf) return;
 
     axios
       .get<ibgeCity[]>(
@@ -97,24 +92,20 @@ const CreatePoint = () => {
     });
   }, []);
 
-  //Pega o valor dos estados quando clicado no INPUT.
   function handleSelectedUf(event: ChangeEvent<HTMLSelectElement>) {
     const uf = event.target.value;
     setSelectedUf(uf);
   }
 
-  //Pega o valor da cidade quando clicado no INPUT.
   function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
     const city = event.target.value;
     setSelectedCity(city);
   }
 
-  //Pega a latitude e longitude quando clicado no MAPA.
   function handleMapClick(event: LeafletMouseEvent) {
     setSelectedPosition([event.latlng.lat, event.latlng.lng]);
   }
 
-  //Pega os valores do INPUT.
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
 
@@ -124,7 +115,6 @@ const CreatePoint = () => {
     });
   }
 
-  //Permite selecionar os ITEMS.
   function handleSelectedItem(id: number) {
     const alreadySelected = selectedItems.findIndex(item => item === id);
 
@@ -136,7 +126,6 @@ const CreatePoint = () => {
     }
   }
 
-  //Cadastra um PONTO DE COLETA.
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
@@ -148,24 +137,22 @@ const CreatePoint = () => {
 
     const data = new FormData();
 
-    data.append("name", name);
-    data.append("email", email);
-    data.append("whatsapp", whatsapp);
-    data.append("uf", uf);
-    data.append("city", city);
-    data.append("latitude", String(latitude));
-    data.append("longitude", String(longitude));
-    data.append("items", items.join(","));
+    data.append('name', name);
+    data.append('email', email);
+    data.append('whatsapp', whatsapp);
+    data.append('uf', uf);
+    data.append('city', city);
+    data.append('latitude', String(latitude));
+    data.append('longitude', String(longitude));
+    data.append('items', items.join(','));
 
-    if (selectedFile) {
-      data.append("image", selectedFile);
-    }
+    if (selectedFile) data.append('image', selectedFile);
 
-    //Cadastra na API.
-    await api.post("points", data);
-    alert("Ponto de coleta cadastrado!");
-    //Manda pra tela HOME.
-    history.push("/");
+    await api.post('points', data);
+
+    alert('Ponto de coleta cadastrado!');
+
+    history.push('/');
   }
 
   return (
@@ -226,14 +213,18 @@ const CreatePoint = () => {
             <span>Selecione um ou mais ítens abaixo</span>
           </legend>
 
-          <Map center={initialPosition} zoom={15} onClick={handleMapClick}>
+          <MapContainer
+            center={initialPosition}
+            zoom={15}
+            scrollWheelZoom={false}
+          >
             <TileLayer
-              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             />
 
             <Marker position={selectedPosition} />
-          </Map>
+          </MapContainer>
 
           <div className='field-group'>
             <div className='field'>
@@ -282,7 +273,7 @@ const CreatePoint = () => {
               <li
                 key={item.id}
                 onClick={() => handleSelectedItem(item.id)}
-                className={selectedItems.includes(item.id) ? "selected" : ""}
+                className={selectedItems.includes(item.id) ? 'selected' : ''}
               >
                 <img src={item.image_url} alt={item.title} />
                 <span>{item.title}</span>
@@ -296,5 +287,3 @@ const CreatePoint = () => {
     </div>
   );
 };
-
-export default CreatePoint;

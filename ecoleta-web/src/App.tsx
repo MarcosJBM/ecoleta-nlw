@@ -1,11 +1,15 @@
-import React from "react";
+import { Route, BrowserRouter } from 'react-router-dom';
 
-import "./App.css";
+import { Home } from '../src/pages/Home';
+import { CreatePoint } from '../src/pages/CreatePoint';
 
-import Routes from "./routes";
+import './App.css';
 
-const App = () => {
-  return <Routes />;
+export const App = () => {
+  return (
+    <BrowserRouter>
+      <Route exact path={'/'} component={Home} />
+      <Route path={'/create-point'} component={CreatePoint} />
+    </BrowserRouter>
+  );
 };
-
-export default App;
