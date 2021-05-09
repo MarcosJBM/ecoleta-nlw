@@ -1,8 +1,8 @@
-import Knex from 'knex';
+import { Knex } from 'knex';
 
 export async function up(knex: Knex) {
   return knex.schema.createTable('point_items', table => {
-    table.increments('id').primary(); //Integer por padrão.
+    table.increments('id').primary();
 
     //Cria uma chave estrangeira na tabela POINTS no campo ID.
     table.integer('point_id').notNullable().references('id').inTable('points');

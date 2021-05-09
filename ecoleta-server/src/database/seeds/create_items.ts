@@ -1,6 +1,5 @@
-import Knex from 'knex';
+import { Knex } from 'knex';
 
-//Valores padrão na tabela ITEMS.
 export async function seed(knex: Knex) {
   await knex('items').insert([
     { title: 'Lâmpadas', image: 'lampadas.svg' },

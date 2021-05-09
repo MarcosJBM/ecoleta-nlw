@@ -1,8 +1,8 @@
-import Knex from 'knex';
+import { Knex } from 'knex';
 
 export async function up(knex: Knex) {
   return knex.schema.createTable('items', table => {
-    table.increments('id').primary(); //Integer por padrão.
+    table.increments('id').primary();
     table.string('image').notNullable();
     table.string('title').notNullable();
   });
