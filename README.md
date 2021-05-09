@@ -1,64 +1,46 @@
 <h1 align="center">
-    <img alt="Ecoleta" src=".github/logoEcoleta.png" height="100px" />
-    <br>Next Level Week #1<br/>
-    Node.js | ReactJS | React Native
+  <img alt="Ecoleta" src=".github/logoEcoleta.png" height="100px" />
+  <br>Next Level Week #1<br/>
+  Node.js | ReactJS | React Native
 </h1>
 
 <p align="center">
-    <a href="#sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="#tecnologias">Tecnologias Utilizadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="#web">Versão Web</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="#mobile">Versão Mobile</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-    <a href="#executar">Como Executar</a>
+  <a href="#sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#executar">Como Executar</a>
 </p>
 
 <p align="center">
-    <img alt="Design do Projeto" width="780px" src=".github/designEcoleta.png" />
+  <img alt="Design do Projeto" width="780px" src=".github/designEcoleta.png" />
 <p>
 
 <a id="sobre"></a>
 
-<h1>📖 Sobre o Projeto</h1>
+# 📖 Sobre o Projeto
 
 O **Ecoleta** é uma aplicação Web e Mobile que ajuda pessoas a cadastrarem e encontrarem pontos de coleta de lixo.
 
-Este projeto foi realizado na semana do meio ambiente.
-
 Esta aplicação foi desenvolvida durante a **Next Level Week #1**, projeto da [Rocketseat](https://rocketseat.com.br/).
+
+<a id="layout"></a>
+
+# 🎨 Layout
+
+Caso queira dar uma olhada no layout da aplicação, ele está disponivel no [Figma](<https://www.figma.com/file/9TlOcj6l7D05fZhU12xWT3/Ecoleta-(Booster)?node-id=0%3A1>).
 
 <a id="tecnologias"></a>
 
-<h1>🔩 Tecnologias Utilizadas</h1>
+# 🔩 Tecnologias
 
-- [Axios](https://github.com/axios/axios)
-- [Express](https://expressjs.com/)
-- [Expo](https://expo.io/)
-- [Leaflet](https://leafletjs.com/)
+- [React.js](https://pt-br.reactjs.org/)
+- [React Native](https://reactnative.dev/)
 - [Node.js](https://nodejs.org/en/)
-- [NPM](https://www.npmjs.com/)
-- [ReactJS](https://reactjs.org/)
-- [React Native](http://facebook.github.io/react-native/)
-- [React Navigation](https://reactnavigation.org/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Knex](http://knexjs.org/)
-- [SQLite](https://www.sqlite.org/)
-- [Yarn](https://yarnpkg.com/)
-
-<a id="web"></a>
-
-<h1>💻 Versão Web</h1>
-
-Caso esteja curioso para saber como é a versão **Web** do **Ecoleta**, o layout está disponivel no [Figma](<https://www.figma.com/file/9TlOcj6l7D05fZhU12xWT3/Ecoleta-(Booster)?node-id=0%3A1>).
-
-<a id="mobile"></a>
-
-<h1>📱 Versão Mobile</h1>
-
-Caso esteja curioso para saber como é a versão **Mobile** do **Ecoleta**, o layout está disponivel no [Figma](<https://www.figma.com/file/9TlOcj6l7D05fZhU12xWT3/Ecoleta-(Booster)?node-id=0%3A1>).
+- [TypeScript](https://www.typescriptlang.org/)
 
 <a id="executar"></a>
 
-<h1>❔ Como Usar a Aplicação</h1>
+# 🤔 Como Executar
 
 <h2><strong>Pré-requisitos</strong></h2>
 
@@ -67,7 +49,7 @@ Caso esteja curioso para saber como é a versão **Mobile** do **Ecoleta**, o la
 - É **necessário** possuir um gerenciador de pacotes, **[Yarn](https://yarnpkg.com/)** ou **[NPM](https://www.npmjs.com/)**.
 - É **necessário** ter o **[Expo](https://expo.io/)** instalado de forma global na máquina.
 
-<h2>Passo 1: Clonando o Projeto na sua máquina:</h2>
+## Passo 1: Clonando o Projeto na sua máquina:
 
 Abra seu terminal, escolha um lugar para clonar o repositório e execute:
 
@@ -75,12 +57,12 @@ Abra seu terminal, escolha um lugar para clonar o repositório e execute:
   git clone https://github.com/MarcosJBM/Ecoleta-NLW.git
 ```
 
-<h2>Passo 2: Configurando o Projeto:</h2>
+## Passo 2: Configurando o Projeto:
 
-Nas pastas **Server** e **Web** execute:
+Nas pastas **Server** e **Web** execute respectivamente:
 
 ```sh
- npm install
+ npm install e yarn install
 ```
 
 Com isso, dependências do projeto serão instaladas.
@@ -99,12 +81,12 @@ Voce irá precisar criar uma Seed, execute:
  npm run knex:seed
 ```
 
-<h2>Passo 3: Executando a aplicação:</h2>
+## Passo 3: Executando a aplicação:
 
 Para executar a aplicação **Web** e **Mobile** utilize:
 
 ```sh
- npm start
+ yarn start
 ```
 
 Para executar o **Server**, utilize:
