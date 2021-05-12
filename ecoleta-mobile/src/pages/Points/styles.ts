@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 32,
@@ -97,5 +97,3 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
 });
-
-export default styles;

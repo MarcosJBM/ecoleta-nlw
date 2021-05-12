@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Feather as Icon } from '@expo/vector-icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { View, Text, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  Alert,
+} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { SvgUri } from 'react-native-svg';
 import * as Location from 'expo-location';
-import api from '../../services/api';
 
-import styles from './styles';
+import { api } from '../../services/api';
+
+import { styles } from './styles';
 
 interface Item {
   id: number;
@@ -29,12 +37,14 @@ interface Params {
   city: string;
 }
 
-const Points = () => {
+export const Points = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [points, setPoints] = useState<Point[]>([]);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
-  const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
+  const [initialPosition, setInitialPosition] = useState<[number, number]>([
+    0, 0,
+  ]);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -44,10 +54,10 @@ const Points = () => {
   //Pega a localização do Usuário.
   useEffect(() => {
     async function loadPosition() {
-      const { status } = await Location.requestPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== 'granted') {
-        Alert.alert('Opa', 'Precisamos da sua permisão para obter sua localização');
+        Alert.alert('Precisamos da sua permisão para obter sua localização');
         return;
       }
 
@@ -82,16 +92,15 @@ const Points = () => {
       });
   }, [selectedItems]);
 
-  function handleNavigateBack() {
+  const handleNavigateBack = () => {
     navigation.goBack();
-  }
+  };
 
-  function handleNavigateToDetail(id: number) {
-    navigation.navigate('Detail', { point_id: id }); //Pega o ID do Ponto, assim pode utilizar em outra Pagina.
-  }
+  const handleNavigateToDetail = (id: number) => {
+    navigation.navigate('Detail', { point_id: id });
+  };
 
-  //Permite selecionar os Items.
-  function handleSelectedItem(id: number) {
+  const handleSelectedItem = (id: number) => {
     const alreadySelected = selectedItems.findIndex(item => item === id);
 
     if (alreadySelected >= 0) {
@@ -100,17 +109,19 @@ const Points = () => {
     } else {
       setSelectedItems([...selectedItems, id]);
     }
-  }
+  };
 
   return (
     <>
       <View style={styles.container}>
         <TouchableOpacity onPress={handleNavigateBack}>
-          <Icon name="arrow-left" size={20} color="#34cb79" />
+          <Icon name='arrow-left' size={20} color='#34cb79' />
         </TouchableOpacity>
 
         <Text style={styles.title}>Bem Vindo.</Text>
-        <Text style={styles.description}>Encontre no mapa um ponto de coleta.</Text>
+        <Text style={styles.description}>
+          Encontre no mapa um ponto de coleta.
+        </Text>
 
         <View style={styles.mapContainer}>
           {initialPosition[0] !== 0 && (
@@ -134,7 +145,10 @@ const Points = () => {
                   }}
                 >
                   <View style={styles.mapMarkerContainer}>
-                    <Image style={styles.mapMarkerImage} source={{ uri: point.image_url }} />
+                    <Image
+                      style={styles.mapMarkerImage}
+                      source={{ uri: point.image_url }}
+                    />
                     <Text style={styles.mapMarkerTitle}>{point.name}</Text>
                   </View>
                 </Marker>
@@ -147,7 +161,10 @@ const Points = () => {
             {items.map(item => (
               <TouchableOpacity
                 key={item.id}
-                style={[styles.item, selectedItems.includes(item.id) ? styles.selectedItem : {}]}
+                style={[
+                  styles.item,
+                  selectedItems.includes(item.id) ? styles.selectedItem : {},
+                ]}
                 onPress={() => handleSelectedItem(item.id)}
               >
                 <SvgUri width={42} height={42} uri={item.image_url} />
@@ -160,5 +177,3 @@ const Points = () => {
     </>
   );
 };
-
-export default Points;
