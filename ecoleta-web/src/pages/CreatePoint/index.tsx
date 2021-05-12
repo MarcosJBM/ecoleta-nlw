@@ -7,7 +7,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
 
-import {Dropzone} from '../../components/Dropzone';
+import { Dropzone } from '../../components/Dropzone';
 
 import { api } from '../../services/api';
 
@@ -32,8 +32,7 @@ export const CreatePoint = () => {
   const [ufs, setUfs] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
   const [initialPosition, setInitialPosition] = useState<[number, number]>([
-    0,
-    0,
+    0, 0,
   ]);
 
   const [formData, setFormData] = useState({
@@ -46,8 +45,7 @@ export const CreatePoint = () => {
   const [selectedCity, setSelectedCity] = useState('0');
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
-    0,
-    0,
+    0, 0,
   ]);
   const [selectedFile, setSelectedFile] = useState<File>();
 

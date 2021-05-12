@@ -12,36 +12,19 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import * as MailComposer from 'expo-mail-composer';
 import { Feather as Icon, FontAwesome } from '@expo/vector-icons';
 
+import { DetailDataProps, DetailParams } from '../../@types';
+
 import { api } from '../../services/api';
 
 import { styles } from './styles';
 
-interface Params {
-  point_id: number;
-}
-
-interface Data {
-  point: {
-    image: string;
-    image_url: string;
-    name: string;
-    email: string;
-    whatsapp: string;
-    city: string;
-    uf: string;
-  };
-  items: {
-    title: string;
-  }[];
-}
-
 export const Detail = () => {
-  const [data, setData] = useState<Data>({} as Data);
+  const [data, setData] = useState<DetailDataProps>({} as DetailDataProps);
 
   const navigation = useNavigation();
   const route = useRoute();
 
-  const routeParams = route.params as Params;
+  const routeParams = route.params as DetailParams;
 
   //Pega os dados de um Ponto.
   useEffect(() => {

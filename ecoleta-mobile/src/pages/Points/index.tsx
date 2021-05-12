@@ -13,29 +13,11 @@ import MapView, { Marker } from 'react-native-maps';
 import { SvgUri } from 'react-native-svg';
 import * as Location from 'expo-location';
 
+import { Item, PointParams, Point } from '../../@types';
+
 import { api } from '../../services/api';
 
 import { styles } from './styles';
-
-interface Item {
-  id: number;
-  title: string;
-  image_url: string;
-}
-
-interface Point {
-  id: number;
-  name: string;
-  image: string;
-  image_url: string;
-  latitude: number;
-  longitude: number;
-}
-
-interface Params {
-  uf: string;
-  city: string;
-}
 
 export const Points = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -49,7 +31,7 @@ export const Points = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const routeParams = route.params as Params;
+  const routeParams = route.params as PointParams;
 
   //Pega a localização do Usuário.
   useEffect(() => {
