@@ -86,3 +86,12 @@ export const Fieldset = styled.fieldset`
     }
   }
 `;
+
+export const FieldGroup = styled.div`
+  flex: 1;
+  display: flex;
+
+  > div + div {
+    margin-left: 24px;
+  }
+`;
