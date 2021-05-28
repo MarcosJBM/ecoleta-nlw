@@ -28,3 +28,37 @@ export const Header = styled.header`
     }
   }
 `;
+
+export const Form = styled.form`
+  margin: 80px auto;
+  padding: 64px;
+  max-width: 730px;
+  background: #fff;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+
+  > h1 {
+    font-size: 36px;
+  }
+
+  > button {
+    width: 260px;
+    height: 56px;
+    background: var(--primary-color);
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    border: 0;
+    align-self: flex-end;
+    margin-top: 40px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+
+    :hover {
+      background: #2fb86e;
+    }
+  }
+`;
