@@ -2,7 +2,7 @@ import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { TileLayer, Marker, MapContainer } from 'react-leaflet';
-import { LeafletMouseEvent } from 'leaflet';
+// import { LeafletMouseEvent } from 'leaflet';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
@@ -11,7 +11,15 @@ import { Dropzone } from '../../components/Dropzone';
 
 import { api } from '../../services/api';
 
-import './styles.css';
+import {
+  Container,
+  Header,
+  Form,
+  Fieldset,
+  FieldGroup,
+  Field,
+  ItemsGrid,
+} from './styles';
 
 interface Item {
   id: number;
@@ -100,9 +108,9 @@ export const CreatePoint = () => {
     setSelectedCity(city);
   }
 
-  function handleMapClick(event: LeafletMouseEvent) {
-    setSelectedPosition([event.latlng.lat, event.latlng.lng]);
-  }
+  // function handleMapClick(event: LeafletMouseEvent) {
+  //   setSelectedPosition([event.latlng.lat, event.latlng.lng]);
+  // }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
@@ -154,26 +162,26 @@ export const CreatePoint = () => {
   }
 
   return (
-    <div id='page-create-point'>
-      <header>
+    <Container>
+      <Header>
         <img src={logo} alt='Logo' />
 
         <Link to='/'>
           <FiArrowLeft />
           Voltar para Home
         </Link>
-      </header>
+      </Header>
 
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <h1>Cadastro do ponto de coleta.</h1>
 
         <Dropzone onFileUploaded={setSelectedFile} />
 
-        <fieldset>
+        <Fieldset>
           <legend>
             <h2>Dados</h2>
           </legend>
-          <div className='field'>
+          <Field>
             <label htmlFor='name'>Nome da Entidade</label>
             <input
               type='text'
@@ -181,10 +189,10 @@ export const CreatePoint = () => {
               id='name'
               onChange={handleInputChange}
             />
-          </div>
+          </Field>
 
-          <div className='field-group'>
-            <div className='field'>
+          <FieldGroup>
+            <Field>
               <label htmlFor='email'>E-mail</label>
               <input
                 type='email'
@@ -192,8 +200,8 @@ export const CreatePoint = () => {
                 id='email'
                 onChange={handleInputChange}
               />
-            </div>
-            <div className='field'>
+            </Field>
+            <Field>
               <label htmlFor='whatsapp'>Whatsapp</label>
               <input
                 type='text'
@@ -201,11 +209,11 @@ export const CreatePoint = () => {
                 id='whatsapp'
                 onChange={handleInputChange}
               />
-            </div>
-          </div>
-        </fieldset>
+            </Field>
+          </FieldGroup>
+        </Fieldset>
 
-        <fieldset>
+        <Fieldset>
           <legend>
             <h2>Endereço</h2>
             <span>Selecione um ou mais ítens abaixo</span>
@@ -224,8 +232,8 @@ export const CreatePoint = () => {
             <Marker position={selectedPosition} />
           </MapContainer>
 
-          <div className='field-group'>
-            <div className='field'>
+          <FieldGroup>
+            <Field>
               <label htmlFor='uf'>Estado</label>
               <select
                 name='uf'
@@ -240,8 +248,8 @@ export const CreatePoint = () => {
                   </option>
                 ))}
               </select>
-            </div>
-            <div className='field'>
+            </Field>
+            <Field>
               <label htmlFor='city'>Cidade</label>
               <select
                 name='city'
@@ -256,17 +264,17 @@ export const CreatePoint = () => {
                   </option>
                 ))}
               </select>
-            </div>
-          </div>
-        </fieldset>
+            </Field>
+          </FieldGroup>
+        </Fieldset>
 
-        <fieldset>
+        <Fieldset>
           <legend>
             <h2>Ítens de Coleta</h2>
             <span>Selecione um ou mais ítens abaixo</span>
           </legend>
 
-          <ul className='items-grid'>
+          <ItemsGrid>
             {items.map(item => (
               <li
                 key={item.id}
@@ -277,11 +285,11 @@ export const CreatePoint = () => {
                 <span>{item.title}</span>
               </li>
             ))}
-          </ul>
-        </fieldset>
+          </ItemsGrid>
+        </Fieldset>
 
         <button type='submit'>Cadastrar ponto de Coleta</button>
-      </form>
-    </div>
+      </Form>
+    </Container>
   );
 };
