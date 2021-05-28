@@ -62,3 +62,27 @@ export const Form = styled.form`
     }
   }
 `;
+
+export const Fieldset = styled.fieldset`
+  margin-top: 64px;
+  min-inline-size: auto;
+  border: 0;
+
+  > legend {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+
+    > h2 {
+      font-size: 24px;
+    }
+
+    > span {
+      font-size: 14px;
+      font-weight: normal;
+      color: var(--text-color);
+    }
+  }
+`;
