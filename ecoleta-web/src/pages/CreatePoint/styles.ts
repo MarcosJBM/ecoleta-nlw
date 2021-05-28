@@ -95,3 +95,41 @@ export const FieldGroup = styled.div`
     margin-left: 24px;
   }
 `;
+
+export const Field = styled.div`
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+
+  > label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  > input[type='text'],
+  input[type='email'],
+  input[type='number'] {
+    flex: 1;
+    background: #f0f0f5;
+    border-radius: 8px;
+    border: 0;
+    padding: 16px 24px;
+    font-size: 16px;
+    color: #6c6c80;
+  }
+
+  > select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    flex: 1;
+    background: #f0f0f5;
+    border-radius: 8px;
+    border: 0;
+    padding: 16px 24px;
+    font-size: 16px;
+    color: #6c6c80;
+  }
+`;
