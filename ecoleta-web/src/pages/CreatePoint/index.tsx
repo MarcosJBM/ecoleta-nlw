@@ -2,7 +2,6 @@ import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { Link, useHistory } from 'react-router-dom';
 import { TileLayer, Marker, MapContainer } from 'react-leaflet';
-// import { LeafletMouseEvent } from 'leaflet';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import logo from '../../assets/logo.svg';
